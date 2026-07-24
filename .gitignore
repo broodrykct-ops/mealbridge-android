@@ -27,3 +27,7 @@ dist-ssr
 android/.gradle/
 android/build/
 android/app/build/
+# Local migration artefacts
+123.zip
+Migrate-MealBridge-AppDeploy.ps1
+_migration-backup-*/
