@@ -1,0 +1,52 @@
+﻿:root {
+  --mb-brand-50: #e8faf7;
+  --mb-brand-100: #cef3ed;
+  --mb-brand-200: #9fe6dc;
+  --mb-brand-300: #67d4c9;
+  --mb-brand-400: #30beb3;
+  --mb-brand-500: #00a99d;
+  --mb-brand-600: #008b82;
+  --mb-brand-700: #006f68;
+  --mb-brand-800: #075953;
+  --mb-brand-900: #0b4945;
+
+  --mb-neutral-0: #ffffff;
+  --mb-neutral-50: #f6f9f8;
+  --mb-neutral-100: #edf3f1;
+  --mb-neutral-200: #dce7e4;
+  --mb-neutral-300: #c2d2ce;
+  --mb-neutral-500: #71817e;
+  --mb-neutral-700: #3d514d;
+  --mb-neutral-900: #173331;
+
+  --mb-success: #268a58;
+  --mb-warning: #c47a13;
+  --mb-danger: #bb3f4a;
+
+  --mb-background: var(--mb-neutral-50);
+  --mb-surface: var(--mb-neutral-0);
+  --mb-surface-soft: var(--mb-brand-50);
+  --mb-text: var(--mb-neutral-900);
+  --mb-text-muted: var(--mb-neutral-500);
+  --mb-border: var(--mb-neutral-200);
+
+  --mb-radius-sm: 10px;
+  --mb-radius-md: 16px;
+  --mb-radius-lg: 22px;
+  --mb-radius-xl: 28px;
+  --mb-radius-full: 999px;
+
+  --mb-space-1: 4px;
+  --mb-space-2: 8px;
+  --mb-space-3: 12px;
+  --mb-space-4: 16px;
+  --mb-space-5: 20px;
+  --mb-space-6: 24px;
+  --mb-space-8: 32px;
+
+  --mb-shadow-sm: 0 4px 14px rgba(23, 51, 49, 0.06);
+  --mb-shadow-md: 0 12px 30px rgba(23, 51, 49, 0.09);
+
+  --mb-duration-fast: 140ms;
+  --mb-duration-normal: 220ms;
+}
