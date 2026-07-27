@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MealBridge SA</string>
-    <string name="title_activity_main">MealBridge SA</string>
+    <string name="app_name">MealBridge</string>
+    <string name="title_activity_main">MealBridge</string>
     <string name="package_name">za.co.mealbridge.app</string>
     <string name="custom_url_scheme">za.co.mealbridge.app</string>
 </resources>
