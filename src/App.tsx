@@ -4,15 +4,18 @@ import { addMealFeedbackEvent, buildMealFeedbackAiContext, loadMealFeedback, sav
 import { mealAiApi } from './services/mealAi';
 import { APP_STORAGE_KEYS, loadAppStorage, saveAppStorage } from './services/appStorage';
 import { SESSION_STORAGE_KEYS, loadSessionStorage, saveSessionStorage } from './services/sessionStorage';
+import type {
+  AdCampaign,
+  AdSlot,
+  BeforeInstallPromptEvent,
+  DraftIngredient,
+  Meal,
+  Person,
+  RecipeDraft,
+  Tab,
+} from './types/mealbridge';
 import { AlertTriangle,BookOpen,Brain,Check,ChefHat,ChevronLeft,ChevronRight,Clock,Download,Heart,Home,Leaf,MessageCircle,Plus,RefreshCw,Settings,ShoppingCart,Sparkles,Trash2,Users,UtensilsCrossed,WalletCards,X } from 'lucide-react';
 
-type Person={id:number;name:string;role:string;age:string;needs:string;exclusions:string;favourites:string;textures:string};
-type Meal={name:string;ingredients:string[];approved:boolean;leftovers:boolean;reason?:string;prepTime?:number;cookTime?:number;servings?:number;instructions?:string[];nutrition?:string;custom?:boolean};
-type DraftIngredient={name:string;amount:string;unit:string};type RecipeDraft={name:string;prepTime:string;cookTime:string;servings:string;targetDay:number;ingredients:DraftIngredient[];instructions:string[];nutrition:string};
-type Tab='home'|'family'|'plan'|'shop'|'settings';
-type AdSlot='plan'|'shop';
-type AdCampaign={id:string;title:string;body:string;category:string;tags:string[];accent:string};
-interface BeforeInstallPromptEvent extends Event{prompt:()=>Promise<void>;userChoice:Promise<{outcome:'accepted'|'dismissed';platform:string}>}
 const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const recipes=[{name:'Chicken and vegetable pasta',ingredients:['chicken breasts','pasta','mixed vegetables','cream','garlic']},{name:'Mild beef mince and pap',ingredients:['beef mince','maize meal','tomato sauce','onion','carrots']},{name:'Easy bobotie with rice',ingredients:['beef mince','bread','milk','eggs','mild curry powder','rice']},{name:'Roast chicken and potatoes',ingredients:['whole chicken','potatoes','carrots','green beans']},{name:'Boerewors tray bake',ingredients:['boerewors','potatoes','butternut','onion']},{name:'Creamy chicken pie',ingredients:['chicken breasts','puff pastry','cream','peas','carrots']},{name:'Spaghetti bolognaise',ingredients:['beef mince','spaghetti','tomato sauce','onion']},{name:'Mild butter chicken',ingredients:['chicken breasts','butter chicken sauce','rice','plain yoghurt']},{name:'Cottage pie',ingredients:['beef mince','potatoes','peas','carrots']},{name:'Tuna pasta bake',ingredients:['tinned tuna','pasta','cheddar cheese','cream']},{name:'Chicken wraps',ingredients:['chicken strips','wraps','lettuce','cheddar cheese','mayonnaise']},{name:'Sausage and mash',ingredients:['pork sausages','potatoes','peas','gravy']},{name:'Macaroni cheese',ingredients:['macaroni','cheddar cheese','milk','butter']},{name:'Beef stew and rice',ingredients:['stewing beef','rice','carrots','potatoes','onion']},{name:'Chicken schnitzel and wedges',ingredients:['chicken schnitzels','potatoes','sweetcorn']},{name:'Mince vetkoek',ingredients:['beef mince','vetkoek mix','onion','tomato sauce']},{name:'Fish fingers and mash',ingredients:['fish fingers','potatoes','peas']},{name:'Cheeseburger night',ingredients:['beef patties','burger rolls','cheddar cheese','tomatoes','lettuce']},{name:'Chicken fried rice',ingredients:['chicken breasts','rice','mixed vegetables','eggs']},{name:'Family braai plate',ingredients:['boerewors','chicken pieces','braai rolls','coleslaw']},{name:'Vegetable curry and rice',ingredients:['chickpeas','potatoes','carrots','mild curry sauce','rice']}];
 const specials:Record<string,string[]>={Checkers:['chicken breasts','pasta','potatoes'],SPAR:['beef mince','rice','milk'],'Pick n Pay':['cheddar cheese','mixed vegetables','whole chicken'],Woolworths:['chicken strips','wraps','green beans'],Shoprite:['maize meal','beef mince','carrots'],Boxer:['rice','potatoes','pork sausages']};
