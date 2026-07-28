@@ -6,6 +6,7 @@ export const APP_STORAGE_KEYS = {
   planWeeks: 'mb-plan-weeks',
   budget: 'mb-budget',
   pantry: 'mb-pantry',
+  shoppingChecked: 'mb-shopping-checked',
   calm: 'mb-calm',
   weeklyAiInstruction: 'mb-weekly-ai-instruction',
 } as const
