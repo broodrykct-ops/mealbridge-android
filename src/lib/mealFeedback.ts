@@ -1,4 +1,4 @@
-﻿export const MEAL_FEEDBACK_STORAGE_KEY = 'mb-meal-feedback-v1';
+export const MEAL_FEEDBACK_STORAGE_KEY = 'mb-meal-feedback-v1';
 export const MAX_FEEDBACK_EVENTS = 100;
 
 export type MealFeedbackSignal =
@@ -228,6 +228,34 @@ export const summariseMealFeedback = (
   };
 };
 
+export type RejectedMealRecord = {
+  name: string;
+  ingredients: string[];
+};
+
+export const getRejectedMealHistory = (
+  store: MealFeedbackStore,
+): RejectedMealRecord[] => {
+  const seen = new Set<string>();
+
+  return [...store.events]
+    .reverse()
+    .filter(event => event.signal === 'replaced')
+    .filter(event => {
+      const key = event.mealName.trim().toLowerCase();
+
+      if (!key || seen.has(key)) {
+        return false;
+      }
+
+      seen.add(key);
+      return true;
+    })
+    .map(event => ({
+      name: event.mealName,
+      ingredients: [...event.ingredients],
+    }));
+};
 export type MealFeedbackAiContext = {
   approvedMeals: string[];
   favouriteMeals: string[];
