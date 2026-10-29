@@ -13,6 +13,7 @@ export type Meal = {
   name: string
   ingredients: string[]
   approved: boolean
+  completed?: boolean
   leftovers: boolean
   reason?: string
   prepTime?: number
@@ -40,7 +41,7 @@ export type RecipeDraft = {
   nutrition: string
 }
 
-export type Tab = 'home' | 'family' | 'plan' | 'shop' | 'settings'
+export type Tab = 'home' | 'family' | 'plan' | 'shop' | 'settings' | 'favourites' | 'help'
 
 export type AdSlot = 'plan' | 'shop'
 

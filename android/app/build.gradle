@@ -37,6 +37,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+            resValue "string", "app_name", "MealBridge Test"
+            resValue "string", "title_activity_main", "MealBridge Test"
+        }
         release {
             if (signingPropertiesFile.exists()) {
                 signingConfig signingConfigs.release
