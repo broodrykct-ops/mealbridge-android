@@ -78,3 +78,18 @@ Physical Android testing and a signed APK/AAB build have not been performed
 here. Before distribution, verify pause/resume across a week boundary,
 upgrade from the installed version, and the real community backend. Increment
 Android versionCode/versionName when preparing the release.
+
+## In-app tutorials
+
+Help in the header opens a dedicated tutorial page from every main screen.
+Home also offers Show me the basics; Settings links to the tutorial index.
+Twelve topics cover first use, navigation, household setup, pantry review,
+planner controls, fresh plans, favourites, personal recipes, cooking, shopping,
+accessibility and optional community sharing. Each topic shows one step at a
+time and expandable button explanations. Reading help does not mutate app
+records; Back to app restores the originating screen. The content is bundled
+with the app and does not require a tutorial service or video downloads.
+
+Mobile browser verification includes the help entry points, step navigation,
+button explanation controls, returning to the originating page, unchanged
+planner data while reading tutorials, and a 320px layout check.

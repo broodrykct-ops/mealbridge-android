@@ -230,6 +230,7 @@ const parseShoppingIngredient = (raw: string) => {
   return { name: name || normaliseIngredientName(trimmed), amount, unit };
 };
 
+import { HelpPage } from './features/help/HelpPage';
 import { PantryReview } from "./components/PantryReview";
 import { FavouritesPage } from "./components/FavouritesPage";
 import {
@@ -323,6 +324,15 @@ function App() {
     loadAppStorage(APP_STORAGE_KEYS.planStarted, localWeekStart()),
   );
   const [currentWeek, setCurrentWeek] = useState(localWeekStart);
+  const [helpVisit, setHelpVisit] = useState(0);
+  const [helpTopic, setHelpTopic] = useState<string | null>(null);
+  const [helpReturn, setHelpReturn] = useState<Tab>('home');
+  const openHelp = (topic: string | null = null) => {
+    setHelpVisit(current => current + 1);
+    setHelpReturn(tab === 'help' ? helpReturn : tab);
+    setHelpTopic(topic);
+    setTab('help');
+  };
   const [shareNotice, setShareNotice] = useState("");
   const [sharing, setSharing] = useState(false);
   useEffect(() => {
@@ -1496,6 +1506,7 @@ function App() {
               </p>
             </div>
           </button>
+          <button onClick={() => openHelp()} aria-label="Help: how to use MealBridge" className="flex min-h-12 shrink-0 items-center gap-2 rounded-xl bg-[#EFF7FB] px-3 py-3 font-semibold text-[#0062A8]"><BookOpen size={18} aria-hidden="true"/>Help</button>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-4 pb-28 pt-6 md:pb-8">
@@ -1516,7 +1527,7 @@ function App() {
             </button>
           ))}
         </nav>
-        {error && (
+        {error && tab !== "help" && (
           <div className="mb-5 flex items-start gap-3 rounded-2xl border border-[#F56C6C]/30 bg-red-50 p-4 text-sm font-semibold text-red-800">
             <AlertTriangle size={19} />
             {error}
@@ -1534,8 +1545,10 @@ function App() {
             }}
           />
         )}
+        {tab === 'help' && <HelpPage key={helpVisit} initialTopic={helpTopic} onNavigate={setTab} onBack={() => setTab(helpReturn)} />}
         {tab === "home" && (
           <section>
+            <div className="mb-5 rounded-3xl border border-teal-100 bg-white p-5 shadow-sm"><h2 className="text-lg font-semibold">New here, or need a hand?</h2><p className="mt-2 leading-7 text-slate-600">Start with one small step. We will show you what to do.</p><button onClick={() => openHelp('start')} className="mt-4 min-h-12 rounded-xl bg-[#0062A8] px-4 py-3 font-semibold text-white">Show me the basics</button></div>
             <div className="relative mb-6 overflow-hidden rounded-[32px] bg-[#0B1D36] p-7 text-white shadow-xl md:p-10">
               <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#00C2AB]/25" />
               <div className="absolute -bottom-20 right-28 h-44 w-44 rounded-full bg-[#0062A8]/30" />
@@ -2294,6 +2307,7 @@ function App() {
               title="Accessibility and product settings"
               text="Make MealBridge quieter, clearer and easier to use."
             />
+            <button onClick={() => openHelp()} className="mb-5 flex min-h-14 w-full items-center gap-3 rounded-2xl bg-[#EFF7FB] p-4 font-semibold text-[#0062A8]"><BookOpen size={20} aria-hidden="true"/>How to use MealBridge</button>
             <div className="grid gap-4 md:grid-cols-2">
               <Toggle
                 title="Calm mode"
