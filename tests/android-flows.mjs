@@ -53,6 +53,17 @@ await page.getByRole('heading',{name:'Family test stew',exact:true}).waitFor();
 assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('mb-plan'))[0].name),'Previous dinner 0');
 await page.reload();
 await page.getByRole('button',{name:'Meals',exact:true}).last().click();
+// Save directly from a planner card, undo it, then save again and check restart.
+const secondMeal=page.locator('article').nth(1);
+await secondMeal.getByRole('button',{name:'Save as favourite',exact:true}).click();
+assert.equal(await secondMeal.getByRole('button',{name:'Saved favourite',exact:true}).getAttribute('aria-pressed'),'true');
+assert.ok(await page.evaluate(()=>JSON.parse(localStorage.getItem('mb-favourite-recipes')).includes('Previous dinner 1')));
+await secondMeal.getByRole('button',{name:'Saved favourite',exact:true}).click();
+assert.ok(!await page.evaluate(()=>JSON.parse(localStorage.getItem('mb-favourite-recipes')).includes('Previous dinner 1')));
+await secondMeal.getByRole('button',{name:'Save as favourite',exact:true}).click();
+await page.reload();
+await page.getByRole('button',{name:'Meals',exact:true}).last().click();
+await page.locator('article').nth(1).getByRole('button',{name:'Saved favourite',exact:true}).waitFor();
 await page.getByRole('button',{name:'Choose favourite',exact:true}).nth(2).click();
 await page.getByRole('button',{name:'Family test stew',exact:true}).click();
 assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('mb-plan'))[2].name),'Family test stew');

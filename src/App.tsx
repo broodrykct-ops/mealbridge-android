@@ -1929,6 +1929,24 @@ function App() {
                       </div>
                       <div className="flex flex-wrap gap-2">
                         <button
+                          aria-pressed={favourites.includes(m.name)}
+                          onClick={() => {
+                            if (favourites.includes(m.name)) {
+                              setFavourites(current => current.filter(name => name !== m.name));
+                            } else {
+                              keepFavourite(m);
+                              setMealFeedback(current => addMealFeedbackEvent(current, {
+                                mealName: m.name, signal: 'favourited', ingredients: m.ingredients,
+                              }));
+                            }
+                          }}
+                          className={'flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold ' +
+                            (favourites.includes(m.name) ? 'bg-[#FFF3D5] text-amber-900' : 'bg-[#E7F8F3] text-[#087A70]')}
+                        >
+                          <Heart size={16} fill={favourites.includes(m.name) ? 'currentColor' : 'none'} />
+                          {favourites.includes(m.name) ? 'Saved favourite' : 'Save as favourite'}
+                        </button>
+                        <button
                           disabled={planBusy || aiBusy !== null}
                           onClick={() => setFavouriteDay(idx)}
                           className="rounded-xl border px-3 py-2 text-sm font-semibold disabled:opacity-50"
