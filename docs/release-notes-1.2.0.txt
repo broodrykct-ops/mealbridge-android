@@ -1,0 +1,8 @@
+MealBridge 1.2.0
+
+- Weekly pantry review to keep your shopping list current.
+- Save full recipes to Favourites directly from the planner.
+- Choose a favourite recipe for any planner day.
+- Add your own recipes and keep them privately.
+- Track cooked meals and start a fresh plan when ready.
+- Simple tutorials with step-by-step help and button explanations.
