@@ -77,7 +77,7 @@ export const tutorials: Tutorial[] = [
   {
     id: 'sharing', title: 'Keep recipes private or share', summary: 'Sharing is always your choice.', screen: 'favourites', screenLabel: 'Open Favourites',
     steps: ['Your own recipes and favourites are saved on this device. Saving one does not upload it to the community.', 'If you want to share a personal recipe, open Favourites and expand Share with the MealBridge community on its card.', 'Read the explanation first. Only tap I give permission — submit this recipe if you want those recipe details sent.'],
-    buttons: [['Share with the MealBridge community', 'Expands an optional explanation. Opening it does not submit anything.'], ['I give permission — submit this recipe', 'Sends the recipe details for review, without your household or pantry information. This connection is not active in the current test build.'], ['Submission unavailable message', 'No submission was confirmed. Your private recipe remains saved. You can try again when community sharing is available.']],
-    note: 'Community sharing still needs its backend enabled. Recipes are submitted for review rather than published automatically. Device-local favourites do not sync between phones.',
+    buttons: [['Share with the MealBridge community', 'Expands an optional explanation. Opening it does not submit anything.'], ['I give permission — submit this recipe', 'Sends the recipe details for review, without your household or pantry information. Only submit if you want the recipe stored for community review.'], ['Submission unavailable message', 'No submission was confirmed. Your private recipe remains saved. You can try again when community sharing is available.']],
+    note: 'Recipes are submitted for review rather than published automatically. Device-local favourites do not sync between phones.',
   },
 ];

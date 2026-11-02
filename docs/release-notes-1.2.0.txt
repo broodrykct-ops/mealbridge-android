@@ -6,3 +6,4 @@ MealBridge 1.2.0
 - Add your own recipes and keep them privately.
 - Track cooked meals and start a fresh plan when ready.
 - Simple tutorials with step-by-step help and button explanations.
+- Optional community recipe submission with your permission.

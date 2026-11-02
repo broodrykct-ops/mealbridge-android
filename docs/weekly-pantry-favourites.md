@@ -28,16 +28,14 @@ not the production entry point.
 
 `backend/index.ts`, `mealPlanContract.ts` and `mealAlternativeContract.ts` were
 captured from AppDeploy app `faf6c5ba337b10734f`, source version
-`1787129841966`. The new route and community modules are prepared source;
-they have **not** been deployed to the running backend.
+`1787129841966`. The community route and modules were deployed to the existing backend on
+2 November 2026. Live checks passed for consent, validation, receipt replay
+and the pending-review acknowledgement. The existing web frontend was retained.
 
-Before release, apply the new route and modules to the latest backend source
-using a generated SDK with `db.tx.add` support, preserving the existing web
-frontend and AI endpoints. Do not replace that app with this Android frontend.
-Confirm a real submission writes one record to
-`community_recipe_submissions`, and that replaying the same request does not
-create another. This integration requires the deployed AppDeploy SDK/database;
-the frontend build does not typecheck or execute that SDK.
+The route uses the generated SDK with `db.tx.add` support. Live submission and
+repeat-submission tests returned the same receipt; missing consent and incomplete
+recipes returned HTTP 400. The native frontend build does not itself typecheck
+or execute the cloud SDK.
 
 The server validates explicit consent and an allowlist of recipe fields,
 validates content/receipt hashes, limits payload size, and stores the recipe

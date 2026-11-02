@@ -10,32 +10,32 @@ export type CommunityRecipe = {
 export type RecipeSubmission = {
   requestId: string;
   consent: true;
-  consentVersion: "recipe-sharing-v1";
+  consentVersion: 'recipe-sharing-v1';
   recipe: CommunityRecipe;
 };
 
 export function parseRecipeSubmission(body: unknown): RecipeSubmission | null {
-  if (!body || typeof body !== "object") return null;
+  if (!body || typeof body !== 'object') return null;
   const value = body as Record<string, unknown>;
   if (
     value.consent !== true ||
-    value.consentVersion !== "recipe-sharing-v1" ||
-    typeof value.requestId !== "string" ||
+    value.consentVersion !== 'recipe-sharing-v1' ||
+    typeof value.requestId !== 'string' ||
     !/^[a-f0-9]{64}$/.test(value.requestId) ||
     !value.recipe ||
-    typeof value.recipe !== "object"
+    typeof value.recipe !== 'object'
   )
     return null;
   const recipe = value.recipe as Record<string, unknown>;
   const text = (input: unknown, max: number): input is string =>
-    typeof input === "string" && input.trim().length > 0 && input.length <= max;
+    typeof input === 'string' && input.trim().length > 0 && input.length <= max;
   const list = (input: unknown): input is string[] =>
     Array.isArray(input) &&
     input.length >= 2 &&
     input.length <= 100 &&
     input.every((item) => text(item, 2000));
   const positive = (input: unknown): input is number =>
-    typeof input === "number" &&
+    typeof input === 'number' &&
     Number.isFinite(input) &&
     input > 0 &&
     input <= 10000;
@@ -46,7 +46,7 @@ export function parseRecipeSubmission(body: unknown): RecipeSubmission | null {
     !positive(recipe.prepTime) ||
     !positive(recipe.cookTime) ||
     !positive(recipe.servings) ||
-    typeof recipe.nutrition !== "string" ||
+    typeof recipe.nutrition !== 'string' ||
     recipe.nutrition.length > 2000
   )
     return null;
@@ -65,7 +65,7 @@ export function parseRecipeSubmission(body: unknown): RecipeSubmission | null {
   return {
     requestId: value.requestId,
     consent: true,
-    consentVersion: "recipe-sharing-v1",
+    consentVersion: 'recipe-sharing-v1',
     recipe: clean,
   };
 }
