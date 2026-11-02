@@ -31,3 +31,6 @@ android/app/build/
 123.zip
 Migrate-MealBridge-AppDeploy.ps1
 _migration-backup-*/
+
+# Browser verification artifacts
+test-results/

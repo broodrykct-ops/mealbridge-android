@@ -1,0 +1,48 @@
+name: Android production bundle
+
+on:
+  push:
+    branches: [feat/weekly-pantry-favourites]
+    paths:
+      - '.github/workflows/android-release-bundle.yml'
+      - 'android/app/build.gradle'
+      - 'src/**'
+      - 'package*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+      - run: npx cap sync android
+      - name: Build production bundle without upload credentials
+        working-directory: android
+        run: bash gradlew --no-daemon :app:bundleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MealBridge-1.2.0-unsigned-AAB
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 14
+          if-no-files-found: error

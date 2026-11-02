@@ -16,8 +16,8 @@ android {
         applicationId "za.co.mealbridge.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -37,6 +37,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".test"
+            versionNameSuffix "-test"
+            resValue "string", "app_name", "MealBridge Test"
+            resValue "string", "title_activity_main", "MealBridge Test"
+        }
         release {
             if (signingPropertiesFile.exists()) {
                 signingConfig signingConfigs.release

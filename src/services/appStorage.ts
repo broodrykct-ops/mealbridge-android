@@ -1,4 +1,7 @@
 export const APP_STORAGE_KEYS = {
+  favouriteSnapshots: 'mb-favourite-snapshots-v1',
+  pantryReviewed: 'mb-pantry-reviewed-week',
+  planStarted: 'mb-plan-started-week',
   people: 'mb-people',
   customRecipes: 'mb-custom-recipes',
   favouriteRecipes: 'mb-favourite-recipes',
